@@ -1,8 +1,14 @@
 <component name="ProjectDictionaryState">
   <dictionary name="conantcougars">
     <words>
+      <w>colorbar</w>
+      <w>crossentropy</w>
+      <w>imshow</w>
       <w>keras</w>
       <w>mnist</w>
+      <w>reformats</w>
+      <w>relu</w>
+      <w>softmax</w>
       <w>tensorflow</w>
     </words>
   </dictionary>
