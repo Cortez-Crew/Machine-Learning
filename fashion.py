@@ -62,3 +62,36 @@ model = keras.Sequential([
 #     that are correctly classified)
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
+# Feeds in the training data into the model
+# The model then learns to associate labels with certain images
+# The model then makes predictions from the test data. Then the results are verified against the actual answers
+model.fit(train_images, train_labels, epochs=5)
+
+# Evaluate the results from the test data to see accuracy on new data
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+print('Test Accuracy:', (test_acc * 100), '%')
+
+# Have the model make the predictions
+predictions = model.predict(test_images)
+
+# # Prints data about the index 0 prediction
+# prediction0 = predictions[0]
+# predictions0_ClassIndex = np.argmax(predictions[0])
+# print('\n\n---\nPrediction data from the last 10 Nodes for item 0 in the test list:\n', prediction0)
+# print('The Predicted category number', predictions0_ClassIndex)
+# # noinspection PyTypeChecker
+# print('The correct classname and category number: ', class_names[predictions0_ClassIndex])
+
+
+def plt_img(i, predictions_array, correct_label, img):
+    predictions_array, correct_label, img = predictions_array[i], correct_label[i], img[i]
+    plt.grid(False)
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.imshow(img, cmap=plt.cm.binary)
+
+    predicted_label = np.argmax(predictions_array)
+    if predicted_label == correct_label:
+        color = blue
+
