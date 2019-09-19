@@ -4,6 +4,8 @@
       <w>argmax</w>
       <w>colorbar</w>
       <w>crossentropy</w>
+      <w>figsize</w>
+      <w>imgs</w>
       <w>imshow</w>
       <w>keras</w>
       <w>mnist</w>
@@ -11,6 +13,7 @@
       <w>relu</w>
       <w>softmax</w>
       <w>tensorflow</w>
+      <w>thisplot</w>
     </words>
   </dictionary>
 </component>

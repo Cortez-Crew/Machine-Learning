@@ -1,5 +1,6 @@
 """
-
+Basic Classification tutorial from the TensorFlow website
+https://www.tensorflow.org/tutorials/keras/basic_classification
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals
@@ -83,8 +84,9 @@ predictions = model.predict(test_images)
 # print('The correct classname and category number: ', class_names[predictions0_ClassIndex])
 
 
-def plt_img(i, predictions_array, correct_label, img):
-    predictions_array, correct_label, img = predictions_array[i], correct_label[i], img[i]
+# Plots the specified image
+def plot_img(index, predictions_array, correct_label, img):
+    predictions_array, correct_label, img = predictions_array[index], correct_label[index], img[index]
     plt.grid(False)
     plt.xticks([])
     plt.yticks([])
@@ -93,5 +95,78 @@ def plt_img(i, predictions_array, correct_label, img):
 
     predicted_label = np.argmax(predictions_array)
     if predicted_label == correct_label:
-        color = blue
+        color = 'blue'
+    else:
+        color = 'red'
 
+    plt.xlabel("{} {:2.0f}% ({})".format(class_names[int(predicted_label)],
+                                         100 * np.max(predictions_array),
+                                         class_names[correct_label]), color=color)
+
+
+# Plots a specified image showing statistics about the accuracy data for the specified test
+def plot_value_array(index, predictions_array, correct_label):
+    predictions_array, correct_label = predictions_array[index], correct_label[index]
+    plt.grid(False)
+    plt.xticks([])
+    plt.yticks([])
+    thisplot = plt.bar(range(10), predictions_array, color="#777777")
+    plt.ylim([0, 1])
+    predicted_label = np.argmax(predictions_array)
+
+    thisplot[predicted_label].set_color('red')
+    thisplot[correct_label].set_color('blue')
+
+
+# # Plots the image index specified along with it's data graph
+# def specify_index_of_prediction():
+#     index = 0
+#     while index != 10:
+#         index = int(input('What index would you like to see?'))
+#         plt.figure(figsize=(6, 3))
+#         plt.subplot(1, 2, 1)
+#         plot_img(index, predictions, test_labels, test_images)
+#         plt.subplot(1, 2, 2)
+#         plot_value_array(index, predictions, test_labels)
+#         plt.show()
+#
+#
+# specify_index_of_prediction()
+
+
+# Creates a plot for the first 15 test images
+# It also shows the graph data
+num_rows = 5
+num_cols = 3
+num_images = num_rows * num_cols
+plt.figure(figsize=(2 * 2 * num_cols, 2 * num_rows))
+for i in range(num_images):
+    plt.subplot(num_rows, 2 * num_cols, (2 * i) + 1)
+    plot_img(i, predictions, test_labels, test_images)
+    plt.subplot(num_rows, 2 * num_cols, (2 * i) + 2)
+    plot_value_array(i, predictions, test_labels)
+plt.show()
+
+
+# Grabs the specified image from the test dataset
+# Then adds it to a batch of images
+def predict():
+    index = int(input('What index would you like to test?'))
+    img = test_images[index]
+    print('Shape of the single img', img.shape)
+
+    img = (np.expand_dims(img, 0))
+    print('Shape of the batch of imgs', img.shape)
+
+    prediction = model.predict(img)
+    print('Prediction data', prediction)
+
+    plot_value_array(0, prediction, test_labels)
+    plt.xticks(range(10), class_names, rotation=45)
+    plt.show()
+
+    result = np.argmax(prediction[0])
+    print('Prediction:', class_names[int(result)])
+
+
+predict()
