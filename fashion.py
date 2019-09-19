@@ -1,5 +1,6 @@
 """
 Basic Classification tutorial from the TensorFlow website
+This script will classify 28x28 images into different categories
 https://www.tensorflow.org/tutorials/keras/basic_classification
 """
 
