@@ -5,6 +5,7 @@
       <w>colorbar</w>
       <w>crossentropy</w>
       <w>figsize</w>
+      <w>imdb</w>
       <w>imgs</w>
       <w>imshow</w>
       <w>keras</w>
