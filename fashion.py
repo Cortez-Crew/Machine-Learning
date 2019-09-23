@@ -44,13 +44,12 @@ plt.show()
 # plt.grid(False)
 # plt.show()
 
-# Reformats the images (2D arrays of pixels) into a single list (1D array of pixels)
-# It is not organized as if you were to unstack layers of pixels
-#
-# The model also consists of teo Dense Layers
-#   ~ The first layer is 128 Neurons that are using the 'Relu Function'
-#   ~ The second layer is 10 Neurons that use the 'Softmax Function' which returns a probability between 0 and 1
-#     on how likely the images is to be a certain thing
+# The model consists of 3 layers:
+#   ~ Flatten: Reformats the images (2D arrays of pixels) into a single list (1D array of pixels)
+#     It is not organized as if you were to unstack layers of pixels
+#   ~ Dense (1): The first dense layer is 128 Neurons that are using the 'Relu Function'
+#   ~ Dense (2): The second dense layer is 10 Neurons that use the 'Softmax Function' which returns a probability
+#     between 0 and 1 on how likely the images is to be a certain thing
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(28, 28)),
     keras.layers.Dense(128, activation=tf.nn.relu),
