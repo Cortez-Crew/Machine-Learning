@@ -1,5 +1,5 @@
 """
-This is my Basic Template for any of my Machine Learning Scripts
+
 """
 from __future__ import absolute_import, division, print_function, unicode_literals
 
@@ -100,7 +100,8 @@ partial_y_train = train_labels[10000:]
 # Feeds in the training data into the model
 # The model does this over 40 iterations of the training data
 # While training it is also compares to the consistent validation data
-history = model.fit(partial_x_train, partial_y_train, epochs=40, batch_size=512, validation_data=(x_val, y_val), verbose=1)
+history = model.fit(partial_x_train, partial_y_train, epochs=40, batch_size=512,
+                    validation_data=(x_val, y_val), verbose=1)
 
 # Evaluate the model and display the results
 results = model.evaluate(test_data, test_labels)
