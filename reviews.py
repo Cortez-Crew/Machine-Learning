@@ -9,6 +9,7 @@ from tensorflow import keras
 
 # Helper libraries
 import numpy as np
+import matplotlib.pyplot as plt
 
 print('TensorFlow Version:', tf.__version__)
 print('Numpy version', np.__version__)
@@ -85,14 +86,12 @@ model.summary()
 #     that are correctly classified)
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
 
-#TODO
 # Sets apart the first 10,000 reviews in the training data to use as a validation set
 x_val = train_data[:10000]
 partial_x_train = train_data[10000:]
 
 y_val = train_labels[:10000]
-partial_y_train = train_data[10000:]
-
+partial_y_train = train_labels[10000:]
 
 # Train the model for 40 epochs in mini-batches of 512 samples.
 # This is 40 iterations over all samples in the x_train and y_train tensors.
@@ -101,6 +100,41 @@ partial_y_train = train_data[10000:]
 # Feeds in the training data into the model
 # The model does this over 40 iterations of the training data
 # While training it is also compares to the consistent validation data
-history = model.fit(partial_x_train, partial_y_train, epochs=40, batch_size=256, validation_data=(x_val, y_val), verbose=1)
+history = model.fit(partial_x_train, partial_y_train, epochs=40, batch_size=512, validation_data=(x_val, y_val), verbose=1)
 
+# Evaluate the model and display the results
+results = model.evaluate(test_data, test_labels)
+print(results)
 
+# Use the dictionary provided by the model history to grab the results from the training data
+# dict_keys(['loss', 'acc', 'val_loss', 'val_acc'])
+history_dict = history.history
+print(history_dict.keys())
+
+acc = history_dict['acc']
+val_acc = history_dict['val_acc']
+loss = history_dict['loss']
+val_loss = history_dict['val_loss']
+
+# Create two plots to show the results of the Training ans Test data
+#
+epochs = range(1, len(acc) + 1)
+# 'bo' means blue dot
+plt.plot(epochs, loss, 'bo', label='Training Loss')
+# 'b' means solid blue line
+plt.plot(epochs, val_loss, 'b', label='Validation Loss')
+plt.title('Training and Validation loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+plt.show()
+
+# clear the first plot and begin the second one
+plt.clf()
+plt.plot(epochs, acc, 'ro', label='Training Accuracy')
+plt.plot(epochs, val_acc, 'r', label='Validation Accuracy')
+plt.title('Training and validation Accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.show()
