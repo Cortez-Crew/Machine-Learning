@@ -3,15 +3,12 @@
 """
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import pathlib
-
 # Tensorflow and Keras
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
 # Helper libraries
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
