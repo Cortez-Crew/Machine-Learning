@@ -60,7 +60,7 @@ print(train_stats)
 
 # Separate the data from the 'labels' or the target values to be predicted
 train_labels = train_dataset.pop('MPG')
-test_dataset = test_dataset.pop('MPG')
+test_labels = test_dataset.pop('MPG')
 
 
 def norm(x):
@@ -149,4 +149,24 @@ history2 = model2.fit(norm_train_data, train_labels, epochs=EPOCHS,
 plot_history(history2)
 
 
-# loss, mae, mse = model2.evaluate(norm_test_data, test_labels)
+loss, mae, mse = model2.evaluate(norm_test_data, test_labels)
+print('Testing Set Mean Abs Error: {:5.2f} MPG'.format(mae))
+
+test_predictions = model2.predict(norm_test_data).flatten()
+
+plt.scatter(test_labels, test_predictions)
+plt.xlabel('True Values (MPG)')
+plt.ylabel('Prediction (MPG)')
+plt.axis('equal')
+plt.axis('square')
+plt.xlim([0, plt.xlim()[1]])
+plt.ylim([0, plt.ylim()[1]])
+plt.plot([-100, 100], [-100, 100])
+plt.show()
+plt.clf()
+
+error = test_predictions - test_labels
+plt.hist(error, bins=25)
+plt.xlabel('Prediction Error (MPG)')
+plt.ylabel('Count')
+plt.show()
