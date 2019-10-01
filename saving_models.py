@@ -39,13 +39,51 @@ model_ = create_model()
 model_.summary()
 
 # Create a file to save the training data
-ckpt_path = 'saving_models/training_1/.ckpt'
+ckpt_path = 'saving_models/training_1/data.ckpt'
 ckpt_dir = os.path.dirname(ckpt_path)
 
 # Create callback for the model
 ckpt_callback = keras.callbacks.ModelCheckpoint(filepath=ckpt_path, save_weights_only=True, verbose=1)
 
+# Train the original model
+# Evaluate it to compare later
 model_.fit(train_images, train_labels, epochs=10, validation_data=(test_images, test_labels), callbacks=[ckpt_callback])
+loss, acc = model_.evaluate(test_images, test_labels)
+print('Original Model Accuracy: {:5.2f}% _ Loss: {:5.2f}%'.format((100 * acc), (100 * loss)))
+
+# Create an untrained model
+# Then evaluate it as a baseline
+model__ = create_model()
+loss, acc = model__.evaluate(test_images, test_labels)
+print('Untrained model Accuracy: {:5.2f}% _ Loss: {:5.2f}%'.format((100 * acc), (100 * loss)))
+
+# Now load the checkpoint data in
+# Then re-evaluate
+model__.load_weights(ckpt_path)
+loss, acc = model__.evaluate(test_images, test_labels)
+print('Restored Model Accuracy: {:5.2f}% _ Loss: {:5.2f}%'.format((100 * acc), (100 * loss)))
+
+
+# Use a new call back for the model
+ckpt_path = 'saving_models/training_2/data-{epoch:04d}.ckpt'
+# noinspection PyRedeclaration
+ckpt_dir = os.path.dirname(ckpt_path)
+ckpt_callback = keras.callbacks.ModelCheckpoint(filepath=ckpt_path, save_weights_only=True, period=5, verbose=1)
+
+# Save model and weights
+_model = create_model()
+_model.save_weights(ckpt_path.format(epoch=0))
+_model.fit(train_images, train_labels, epochs=40, callbacks=[ckpt_callback],
+           validation_data=(test_images, test_labels), verbose=0)
+
+latest = tf.train.latest_checkpoint(ckpt_dir)
+__model = create_model()
+__model.load_weights(latest)
+loss, acc = __model.evaluate(test_images, test_labels)
+print('Restored model 2 Accuracy: {:5.2f}% _ Loss: {:5.2f}%'.format((100 * acc), (100 * loss)))
+
+
+
 
 
 
