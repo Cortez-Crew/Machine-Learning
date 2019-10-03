@@ -1,5 +1,6 @@
 """
 My notes for TensorFlow
+https://github.com/easy-tensorflow/easy-tensorflow/
 ↖ ↗ ↘ ↙
 
 """
