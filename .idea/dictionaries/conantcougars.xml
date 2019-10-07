@@ -4,6 +4,7 @@
       <w>argmax</w>
       <w>colorbar</w>
       <w>crossentropy</w>
+      <w>dtype</w>
       <w>figsize</w>
       <w>imdb</w>
       <w>imgs</w>
