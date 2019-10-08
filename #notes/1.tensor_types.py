@@ -34,7 +34,7 @@ def no_names():
 
 def names():
     """
-    This graph will look the same as no_names() except it will have labels
+        This graph will look the same as no_names() except it will have labels
                 [ Sum ]
                ↗       ↖
             { A }     { B }
@@ -58,10 +58,10 @@ def types():
 
 def variables_old():
     """
-    This is the old method of initializing Variables.
+        This is the old method of initializing Variables.
 
-    Basic Args for Variable
-    tf.Variable(value, name=None)
+        Basic Args for Variable
+        tf.Variable(value, name=None)
     """
     with tf.Session() as sess:
         s = tf.Variable(2, name='Scalar')                   # Scalar:0
@@ -73,12 +73,65 @@ def variables_old():
 
 def variables_new():
     """
-    This is the newer recommended way to create a Variable with TensorFlow
+        This is the newer recommended way to create a Variable with TensorFlow
 
+        tf.get_variable(
+                        name,
+                        shape=None,
+                        dtype=None,
+                        initializer=None,
+                        regularizer=None,
+                        trainable=True,
+                        collections=None,
+                        caching_device=None,
+                        partitioner=None,
+                        validate_shape=True,
+                        use_resource=None,
+                        custom_getter=None,
+                        constraint=None
+                        )
     """
     with tf.Session() as sess:
         s = tf.get_variable('Scalar', initializer=tf.constant(2))
         m = tf.get_variable('Matrix', initializer=tf.constant([[1, 2], [3, 4]]))
-        # w = tf.
+        w = tf.get_variable('Weight_Matrix', shape=(784, 10), initializer=tf.zeros_initializer())
+
+        print(s, m, w)
+
+
+def initializers():
+    """
+        When using tf.get_variable() we need to initialize the value in the session before we can use it
+    """
+    with tf.Session() as sess:
+        a = tf.get_variable(name='A', initializer=tf.constant(2))
+        b = tf.get_variable(name='B', initializer=tf.constant(3))
+        c = tf.add(a, b, name='Add')
+
+        # Here the global initializer is set
+        init_op = tf.global_variables_initializer()
+
+        sess.run(init_op)
+        print(sess.run([a, b, c]))
+
+
+def weights_and_biases():
+    """
+        Variables are commonly used for weights and biases in neural networks.
+         ~ Weights are commonly initialized with tf.truncated_normal_initializer(stddev=value)
+         ~ Biases are commonly initialized with tf.zeros_initializer()
+    """
+    with tf.Session() as sess:
+        weights = tf.get_variable(name='W', shape=(2, 3), initializer=tf.truncated_normal_initializer(stddev=0.01))
+        biases = tf.get_variable(name='b', shape=3, initializer=tf.zeros_initializer)
+
+        init_op = tf.global_variables_initializer()
+
+        sess.run(init_op)
+        w, b = sess.run([weights, biases])
+        print(f'Weights = {w}')
+        print(f'Biases = {b}')
+
+
 
 

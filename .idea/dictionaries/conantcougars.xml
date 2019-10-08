@@ -11,7 +11,9 @@
       <w>imshow</w>
       <w>keras</w>
       <w>mnist</w>
+      <w>partitioner</w>
       <w>reformats</w>
+      <w>regularizer</w>
       <w>relu</w>
       <w>softmax</w>
       <w>tensorflow</w>
