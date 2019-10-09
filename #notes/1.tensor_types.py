@@ -133,5 +133,25 @@ def weights_and_biases():
         print(f'Biases = {b}')
 
 
+def placeholders():
+    """
+        Placeholders are basically empty variables that will have their values added at a later time.
+        Examples:
+            tf.placeholder(tf.float32, shape=(5))
+            tf.placeholder(dtype=tf.float32, shape=None, name=None)
+            tf.placeholder(tf.float32, shape=(None, 794), name='input')
+            tf.placeholder(tf.float32, shape=(None, 10), name='label')
+    """
+    with tf.Session() as sess:
+        a = tf.constant([5, 5, 5], dtype=tf.float32, name='A')
+        b = tf.placeholder(dtype=tf.float32, shape=3, name='B')
+        c = tf.add(a, b, name='Add')
 
+        # In order to use the placeholder we now need to assign values to it.
+        # Here, use a dictionary
+        d = {b: [1, 2, 3]}
+
+        # Then we need to feed it into the session
+        print(sess.run(c, feed_dict=d))     # [6. 7. 8.]
+        print(a, b, c)
 

@@ -93,13 +93,3 @@ def multiple_functions():
         power_out, useless_out = sess.run([power_op, useless_op])
         print(power_out, useless_out)
 
-
-multiple_functions()
-
-
-
-
-
-
-
-
