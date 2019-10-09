@@ -9,7 +9,7 @@ import tensorflow.compat.v1 as tf
 
 """
     As seen earlier, when we use variables from python in a tensor, 
-    their name doesnt transfer to the TensorFloe graph. To fix this 
+    their name doesnt transfer to the TensorFlow graph. To fix this 
     we can use a TensorFlow constant.
     
     Args for constant:
@@ -18,6 +18,7 @@ import tensorflow.compat.v1 as tf
 
 
 def no_names():
+    """"""
     """
         This graph looks like:
                 [ add ]
@@ -33,6 +34,7 @@ def no_names():
 
 
 def names():
+    """"""
     """
         This graph will look the same as no_names() except it will have labels
                 [ Sum ]
@@ -57,6 +59,7 @@ def types():
 
 
 def variables_old():
+    """"""
     """
         This is the old method of initializing Variables.
 
@@ -72,6 +75,7 @@ def variables_old():
 
 
 def variables_new():
+    """"""
     """
         This is the newer recommended way to create a Variable with TensorFlow
 
@@ -100,6 +104,7 @@ def variables_new():
 
 
 def initializers():
+    """"""
     """
         When using tf.get_variable() we need to initialize the value in the session before we can use it
     """
@@ -116,6 +121,7 @@ def initializers():
 
 
 def weights_and_biases():
+    """"""
     """
         Variables are commonly used for weights and biases in neural networks.
          ~ Weights are commonly initialized with tf.truncated_normal_initializer(stddev=value)
@@ -134,6 +140,7 @@ def weights_and_biases():
 
 
 def placeholders():
+    """"""
     """
         Placeholders are basically empty variables that will have their values added at a later time.
         Examples:

@@ -2,6 +2,7 @@
   <dictionary name="conantcougars">
     <words>
       <w>argmax</w>
+      <w>backpropagating</w>
       <w>colorbar</w>
       <w>crossentropy</w>
       <w>dtype</w>

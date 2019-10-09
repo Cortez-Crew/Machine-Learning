@@ -65,6 +65,7 @@ def add_functions():
 
 
 def multiple_functions():
+    """"""
     """
 
     Graph of the following function:
