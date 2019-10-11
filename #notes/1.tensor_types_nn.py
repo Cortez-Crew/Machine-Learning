@@ -35,6 +35,7 @@ import numpy as np
         signal, and updating the parameters (Weights, biases) is an 'Iteration'.
 """
 
+
 def neural_network_basics():
     """"""
     """"
