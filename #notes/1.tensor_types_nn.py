@@ -35,7 +35,6 @@ import numpy as np
         signal, and updating the parameters (Weights, biases) is an 'Iteration'.
 """
 
-
 def neural_network_basics():
     """"""
     """"
@@ -46,7 +45,7 @@ def neural_network_basics():
         The shape is (None, 784) because we want the network to be able to accept any number of inputs, so this is
         used like a wildcard.
     """
-    x = tf.placeholder(dtype=tf.float32, shape=(None, 784), name='x')
+    x = tf.placeholder(dtype=tf.float32, shape=[None, 784], name='x')
 
     """
         In addition to the input, we need to set up our weights and biases. These will be variables.
@@ -58,9 +57,9 @@ def neural_network_basics():
         will be [784, 200].
     """
     weight_initer = tf.truncated_normal_initializer(mean=0, stddev=0.01)
-    w = tf.get_variable(name='Weight', dtype=tf.float32, shape=(784, 200), initializer=weight_initer)
+    w = tf.get_variable(name='Weight', dtype=tf.float32, shape=[784, 200], initializer=weight_initer)
 
-    bias_initer = tf.constant(0.0, shape=200, dtype=tf.float32)
+    bias_initer = tf.constant(0.0, shape=[200], dtype=tf.float32)
     b = tf.get_variable(name='Bias', dtype=tf.float32, initializer=bias_initer)
 
     """
@@ -83,5 +82,4 @@ def neural_network_basics():
         print(sess.run(h, feed_dict=d))
 
 
-
-
+neural_network_basics()
