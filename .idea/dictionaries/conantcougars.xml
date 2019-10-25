@@ -12,6 +12,7 @@
       <w>imshow</w>
       <w>initer</w>
       <w>keras</w>
+      <w>logdir</w>
       <w>mnist</w>
       <w>partitioner</w>
       <w>reformats</w>
@@ -21,6 +22,7 @@
       <w>tensorboard</w>
       <w>tensorflow</w>
       <w>thisplot</w>
+      <w>waity</w>
     </words>
   </dictionary>
 </component>
